@@ -30,6 +30,8 @@ $stub->add_response(
 $imposter->add_stub($stub);
 
 my $expect_json = {
+    port => 4546,
+    protocol => 'http',
     stubs => [
         {
             responses => [
@@ -53,6 +55,6 @@ my $expect_json = {
         }
     ]
 };
-ok(1);
 
+cmp_deeply( decode_json($imposter->as_json), $expect_json );
 done_testing();

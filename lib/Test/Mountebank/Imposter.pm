@@ -27,7 +27,9 @@ sub as_hashref {
     my $self = shift;
     croak "An imposter must have at least one stub" if $self->has_no_stubs;
     return {
-        stubs  => [ $self->map_stubs( sub { $_->as_hashref } ) ],
+        stubs    => [ $self->map_stubs( sub { $_->as_hashref } ) ],
+        protocol => $self->protocol,
+        port     => $self->port,
     };
 }
 
