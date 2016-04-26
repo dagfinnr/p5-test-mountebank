@@ -24,21 +24,11 @@ sub as_hashref {
         my %headers = $self->headers->flatten;
         $hashref->{headers} = \%headers;
     }
-    return $hashref;
+    return { equals => $hashref };
 }
+
 sub as_json {
-    return encode_json({ equals => $_[0]->as_hashref() });
+    return encode_json( $_[0]->as_hashref() );
 }
-
-
-
-=todo
-
-Coercion for HTTP::Headers
-
-=cut
-
-
-
 
 1;
