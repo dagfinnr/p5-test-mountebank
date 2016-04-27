@@ -1,9 +1,9 @@
 package Test::Mountebank::Predicate::Equals;
 
 use Moose;
-use MooseX::Types::HTTPMethod qw(HTTPMethod11);
-use HTTP::Headers;
 
+use Test::Mountebank::Types qw( HTTPHeaders );
+use MooseX::Types::HTTPMethod qw(HTTPMethod11);
 use Mojo::JSON qw(encode_json);
 
 has method      => ( is => 'ro', isa => HTTPMethod11 );
@@ -11,7 +11,7 @@ has path        => ( is => 'ro', isa => 'Str' );
 has body        => ( is => 'ro', isa => 'Str' );
 has requestFrom => ( is => 'ro', isa => 'Str' );
 has query       => ( is => 'ro', isa => 'HashRef' );
-has headers     => ( is => 'ro', isa => 'HTTP::Headers' );
+has headers     => ( is => 'ro', isa => HTTPHeaders, coerce => 1 );
 
 sub as_hashref {
     my $self = shift;

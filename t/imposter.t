@@ -19,9 +19,9 @@ $stub->add_predicate(
 $stub->add_response(
     Test::Mountebank::Response::Is->new(
         statusCode => 404,
-        headers => HTTP::Headers->new(
+        headers => {
             Content_Type => "text/html"
-        ),
+        },
         body => 'ERROR'
     )
 );

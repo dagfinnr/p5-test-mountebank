@@ -1,15 +1,13 @@
 package Test::Mountebank::Response::Is;
 
 use Moose;
-use Method::Signatures;
-
-use Mojo::JSON qw(encode_json);
+use Test::Mountebank::Types qw( HTTPHeaders );
 
 use Mojo::JSON qw(encode_json);
 
 has statusCode => ( is => 'ro', isa => 'Int' );
 has body       => ( is => 'ro', isa => 'Str | HashRef' );
-has headers    => ( is => 'ro', isa => 'HTTP::Headers');
+has headers    => ( is => 'ro', isa => HTTPHeaders, coerce => 1);
 
 sub as_hashref {
     my $self = shift;

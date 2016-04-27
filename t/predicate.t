@@ -13,9 +13,9 @@ subtest 'full equals' => sub  {
         query       => { first => "1", second => "2" },
         body        => "dummy body",
         requestFrom => "::ffff:127.0.0.1",
-        headers     => HTTP::Headers->new(
+        headers     => {
             Content_Type => 'text/html; version=3.2',
-        ),
+        },
     );
 
     my $expect_json = {

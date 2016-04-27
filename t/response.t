@@ -10,10 +10,10 @@ use HTTP::Headers;
 subtest 'string body' => sub  {
     my $is = Test::Mountebank::Response::Is->new(
         statusCode => 201,
-        headers => HTTP::Headers->new(
+        headers => {
             Location => "http://localhost:4545/customers/123",
             Content_Type => "application/xml"
-        ),
+        },
         body => '<customer><email>customer@test.com</email></customer>'
     );
 
@@ -33,10 +33,10 @@ subtest 'string body' => sub  {
 subtest 'hashref/json body' => sub  {
     my $is = Test::Mountebank::Response::Is->new(
         statusCode => 201,
-        headers => HTTP::Headers->new(
+        headers => {
             Location => "http://localhost:4545/customers/123",
             Content_Type => "application/xml"
-        ),
+        },
         body => { foo => 'bar' },
     );
 
