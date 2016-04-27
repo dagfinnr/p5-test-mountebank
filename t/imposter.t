@@ -8,26 +8,15 @@ use Mojo::JSON qw(decode_json);
 
 my $imposter = Test::Mountebank::Imposter->new( port => 4546 );
 
-my $stub = Test::Mountebank::Stub->new();
-
-$stub->add_predicate(
-    Test::Mountebank::Predicate::Equals->new(
-        path => "/test",
-    )
+$imposter->stub->predicate(
+    path => "/test",
+)->response(
+    statusCode => 404,
+    headers => {
+        Content_Type => "text/html"
+    },
+    body => 'ERROR'
 );
-
-$stub->add_response(
-    Test::Mountebank::Response::Is->new(
-        statusCode => 404,
-        headers => {
-            Content_Type => "text/html"
-        },
-        body => 'ERROR'
-    )
-);
-
-
-$imposter->add_stub($stub);
 
 my $expect_json = {
     port => 4546,

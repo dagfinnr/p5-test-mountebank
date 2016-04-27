@@ -8,20 +8,14 @@ use Mojo::JSON qw(decode_json);
 
 my $stub = Test::Mountebank::Stub->new();
 
-$stub->add_predicate(
-    Test::Mountebank::Predicate::Equals->new(
-        path => "/test",
-    )
-);
-
-$stub->add_response(
-    Test::Mountebank::Response::Is->new(
-        statusCode => 404,
-        headers => {
-            Content_Type => "text/html"
-        },
-        body => 'ERROR'
-    )
+$stub->predicate(
+    path => "/test",
+)->response(
+    statusCode => 404,
+    headers => {
+        Content_Type => "text/html"
+    },
+    body => 'ERROR'
 );
 
 my $expect_json = {
