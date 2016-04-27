@@ -8,7 +8,7 @@ use Mojo::JSON qw(encode_json);
 use Mojo::JSON qw(encode_json);
 
 has statusCode => ( is => 'ro', isa => 'Int' );
-has body       => ( is => 'ro', isa => 'Str' );
+has body       => ( is => 'ro', isa => 'Str | HashRef' );
 has headers    => ( is => 'ro', isa => 'HTTP::Headers');
 
 sub as_hashref {
