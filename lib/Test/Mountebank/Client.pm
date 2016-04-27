@@ -2,6 +2,7 @@ package Test::Mountebank::Client;
 use Moose;
 use Method::Signatures;
 use Mojo::UserAgent;
+use Test::Mountebank::Imposter;
 
 has ua => (
     is      => 'ro',
@@ -22,8 +23,8 @@ method delete_imposters(@on_ports) {
     $self->ua->delete($self->mb_url . "/imposters/$_") for @on_ports;
 }
 
-method create_imposter($json) {
-    $self->ua->post($self->mb_url . "/imposters" => json => $json);
+method save_imposter(Test::Mountebank::Imposter $imp) {
+    $self->ua->post($self->mb_url . "/imposters" => json => $imp->as_hashref);
 }
 
 1;

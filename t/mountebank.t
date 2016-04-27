@@ -3,7 +3,10 @@
 use strict;
 use Test::More;
 use Test::Mocha;
+use Test::Deep;
 use Test::Mountebank::Client;
+use Mojo::JSON qw(decode_json encode_json);
+use Types::Standard qw(Any StrMatch);
 
 my $mock_ua = mock();
 
@@ -32,8 +35,58 @@ subtest 'can delete imposters' => sub  {
 };
 
 subtest 'can create imposter' => sub  {
-    $client->create_imposter('{ "dummy":"json" }');
-    called_ok { $mock_ua->post('http://example.com:2525/imposters', 'json', '{ "dummy":"json" }') };
+
+    my $imposter = Test::Mountebank::Imposter->new( port => 4546 );
+
+    my $stub = Test::Mountebank::Stub->new();
+
+    $stub->add_predicate(
+        Test::Mountebank::Predicate::Equals->new(
+            path => "/test",
+        )
+    );
+
+    $stub->add_response(
+        Test::Mountebank::Response::Is->new(
+            statusCode => 404,
+            headers => HTTP::Headers->new(
+                Content_Type => "text/html"
+            ),
+            body => 'ERROR'
+        )
+    );
+
+    $imposter->add_stub($stub);
+    $client->save_imposter($imposter);
+    my $expect_json = {
+        port => 4546,
+        protocol => 'http',
+        stubs => [
+            {
+                responses => [
+                    {
+                        is => {
+                            statusCode => 404,
+                            headers => {
+                                "Content-Type" => "text/html"
+                            },
+                            body => 'ERROR'
+                        }
+                    }
+                ],
+                predicates => [
+                    {
+                        equals => {
+                            path => "/test",
+                        }
+                    }
+                ]
+            }
+        ]
+    };
+
+    my ($call) = inspect { $mock_ua->post(Any, Any, Any ) };
+    cmp_deeply([$call->args()]->[2], $expect_json);
 };
 
 done_testing();
