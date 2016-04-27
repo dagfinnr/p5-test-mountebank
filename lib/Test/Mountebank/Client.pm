@@ -11,6 +11,10 @@ has ua => (
 has base_url => ( is => 'ro', isa => 'Str', required => 1 );
 has port => ( is => 'rw', isa => 'Int', default => 2525 );
 
+method create_imposter(:$port = 4525, :$protocol = 'http') {
+    return Test::Mountebank::Imposter->new(port => $port, protocol => $protocol);
+}
+
 method mb_url() {
     return $self->base_url . ":" . $self->port;
 }

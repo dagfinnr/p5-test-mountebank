@@ -23,6 +23,13 @@ has stubs   => (
     },
 );
 
+sub stub {
+    my $self = shift;
+    my $stub = Test::Mountebank::Stub->new(@_);
+    $self->add_stub($stub);
+    return $stub;
+}
+
 sub as_hashref {
     my $self = shift;
     croak "An imposter must have at least one stub" if $self->has_no_stubs;

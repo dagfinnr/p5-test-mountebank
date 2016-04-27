@@ -11,7 +11,6 @@ has path        => ( is => 'ro', isa => 'Str' );
 has body        => ( is => 'ro', isa => 'Str' );
 has requestFrom => ( is => 'ro', isa => 'Str' );
 has query       => ( is => 'ro', isa => 'HashRef' );
-has query       => ( is => 'ro', isa => 'HashRef' );
 has headers     => ( is => 'ro', isa => 'HTTP::Headers' );
 
 sub as_hashref {

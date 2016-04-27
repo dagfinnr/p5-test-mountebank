@@ -34,6 +34,18 @@ has responses => (
     },
 );
 
+sub predicate {
+    my $self = shift;
+    $self->add_predicate(Test::Mountebank::Predicate::Equals->new(@_));
+    return $self;
+}
+
+sub response {
+    my $self = shift;
+    $self->add_response(Test::Mountebank::Response::Is->new(@_));
+    return $self;
+}
+
 sub as_hashref {
     my $self = shift;
     croak "A stub must have at least one predicate" if $self->has_no_predicates;
