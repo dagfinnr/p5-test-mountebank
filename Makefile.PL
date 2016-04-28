@@ -3,9 +3,9 @@ use inc::Module::Install;
 perl_version '5.010001';
 license 'proprietary'; # the license type ('all_from' needs this)
 
-all_from 'lib/Test::Mountebank';
+all_from 'lib/Test/Mountebank.pm';
 
-requires 'HTTP::Headers';
+requires 'HTTP::Message' => '6.11';
 requires 'Method::Signatures';
 requires 'Mojo::JSON';
 requires 'Mojo::UserAgent';
