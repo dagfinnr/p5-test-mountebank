@@ -1,5 +1,6 @@
 package Test::Mountebank;
 
+=encoding utf8
 =head1 NAME
 
 Test::Mountebank - Perl client library for mountebank
@@ -39,7 +40,7 @@ Test::Mountebank - Perl client library for mountebank
         body => '{ "error": "No such qux: 999" }',
     );
 
-    # Clear existing imposter
+    # Clear existing imposter on port 4546
     $mb->delete_imposters(4546); # Takes more than one port number, if desired
 
     # Send the new imposter to mountebank
