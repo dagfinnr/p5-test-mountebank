@@ -1,6 +1,7 @@
 package Test::Mountebank;
 
 =encoding utf8
+
 =head1 NAME
 
 Test::Mountebank - Perl client library for mountebank
