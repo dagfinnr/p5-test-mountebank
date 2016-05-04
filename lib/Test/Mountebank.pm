@@ -1,5 +1,7 @@
 package Test::Mountebank;
 
+use Test::Mountebank::Client;
+
 =encoding utf8
 
 =head1 NAME
@@ -49,20 +51,69 @@ Test::Mountebank - Perl client library for mountebank
 
 =head1 DESCRIPTION
 
-# longer description...
+The example in the synopsis builds an object structure that generates JSON code like
+the following, which can be sent to the running mountebank instance in a POST request.
 
+    {
+        "port": 4546,
+        "protocol": "http",
+        "stubs": [
+            {
+                "predicates": [
+                    {
+                        "equals": {
+                            "method": "GET",
+                            "path": "/foobar.json"
+                        }
+                    }
+                ],
+                "responses": [
+                    {
+                        "is": {
+                            "body": {
+                                "foo": "bar"
+                            },
+                            "headers": {
+                                "Content-Type": "application/json"
+                            },
+                            "statusCode": 200
+                        }
+                    }
+                ]
+            },
+            {
+                "predicates": [
+                    {
+                        "equals": {
+                            "method": "GET",
+                            "path": "/qux/999/json"
+                        }
+                    }
+                ],
+                "responses": [
+                    {
+                        "is": {
+                            "body": "{ \"error\": \"No such qux: 999\" }",
+                            "headers": {
+                                "Content-Type": "application/json"
+                            },
+                            "statusCode": 404
+                        }
+                    }
+                ]
+            }
+        ]
+    }
 
-=head1 INTERFACE
+Compare the mountebank documentation at L<http://www.mbtest.org/docs/api/stubs>
+and L<http://www.mbtest.org/docs/api/predicates>.  Currently as least,
+Test::Mountebank implements only the features of mountebank stubs that are most
+useful for simulating a REST API. There is only one type of predicate (C<equals>)
+and only one type of response (C<is>).
 
-
-=head1 DEPENDENCIES
-
-
-=head1 SEE ALSO
 
 =cut
 
-use Test::Mountebank::Client;
 
 
 =head1 AUTHOR
