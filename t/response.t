@@ -6,6 +6,7 @@ use Test::Deep;
 use Test::Mountebank::Response::Is;
 use Mojo::JSON qw(decode_json);
 use HTTP::Headers;
+use File::Temp;
 
 subtest 'string body' => sub  {
     my $is = Test::Mountebank::Response::Is->new(
@@ -53,5 +54,21 @@ subtest 'hashref/json body' => sub  {
     cmp_deeply( decode_json($is->as_json), $expect_json );
 };
 
+subtest 'can get body from file' => sub  {
+    my $html = qq{<html>\n<div class="foo">\n</div>\n</html>};
+    my $tmp = File::Temp->new(SUFFIX => '.html');
+    print $tmp $html;
+    $tmp->close();
+    my $eq = Test::Mountebank::Response::Is->new(
+        body_from_file => "$tmp",
+    );
+
+    my $expect_json = {
+        is => {
+            body => $html,
+        },
+    };
+    cmp_deeply( decode_json($eq->as_json), $expect_json);
+};
 
 done_testing();

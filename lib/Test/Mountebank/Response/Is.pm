@@ -2,12 +2,23 @@ package Test::Mountebank::Response::Is;
 
 use Moose;
 use Test::Mountebank::Types qw( HTTPHeaders );
-
 use Mojo::JSON qw(encode_json);
+use File::Slurper qw/read_text/;
 
-has statusCode => ( is => 'ro', isa => 'Int' );
-has body       => ( is => 'ro', isa => 'Str | HashRef' );
-has headers    => ( is => 'ro', isa => HTTPHeaders, coerce => 1);
+has statusCode     => ( is => 'ro', isa => 'Int' );
+has body           => ( is => 'rw', isa => 'Str | HashRef' );
+has headers        => ( is => 'ro', isa => HTTPHeaders, coerce => 1);
+
+has body_from_file => (
+    is         => 'ro',
+    isa        => 'Str',
+    trigger    => \&_read_body_from_file,
+);
+
+sub _read_body_from_file {
+    my $self = shift;
+    $self->body(read_text($self->body_from_file));
+}
 
 sub as_hashref {
     my $self = shift;
