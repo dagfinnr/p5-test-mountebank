@@ -7,6 +7,7 @@ use Test::Mountebank::Response::Is;
 use Mojo::JSON qw(decode_json);
 use HTTP::Headers;
 use File::Temp;
+use Test::Exception;
 
 subtest 'string body' => sub  {
     my $is = Test::Mountebank::Response::Is->new(
@@ -59,7 +60,7 @@ subtest 'can get body from file' => sub  {
     my $tmp = File::Temp->new(SUFFIX => '.html');
     print $tmp $html;
     $tmp->close();
-    my $eq = Test::Mountebank::Response::Is->new(
+    my $is = Test::Mountebank::Response::Is->new(
         body_from_file => "$tmp",
     );
 
@@ -68,7 +69,11 @@ subtest 'can get body from file' => sub  {
             body => $html,
         },
     };
-    cmp_deeply( decode_json($eq->as_json), $expect_json);
+    cmp_deeply( decode_json($is->as_json), $expect_json);
 };
 
+subtest 'croaks on empty body' => sub  {
+    my $tmp = File::Temp->new(SUFFIX => '.html');
+    dies_ok { Test::Mountebank::Response::Is->new( body_from_file => "$tmp") };
+};
 done_testing();

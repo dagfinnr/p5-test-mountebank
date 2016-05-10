@@ -4,6 +4,7 @@ use Moose;
 use Test::Mountebank::Types qw( HTTPHeaders );
 use Mojo::JSON qw(encode_json);
 use File::Slurper qw/read_text/;
+use Carp;
 
 has statusCode     => ( is => 'ro', isa => 'Int' );
 has body           => ( is => 'rw', isa => 'Str | HashRef' );
@@ -17,7 +18,9 @@ has body_from_file => (
 
 sub _read_body_from_file {
     my $self = shift;
-    $self->body(read_text($self->body_from_file));
+    my $body = read_text($self->body_from_file);
+    croak ("Empty response body read from file: " . $self->body_from_file) if length($body) < 1;
+    $self->body($body);
 }
 
 sub as_hashref {

@@ -19,5 +19,6 @@ test_requires 'Test::Deep';
 test_requires 'Test::Mocha';
 test_requires 'Test::More';
 test_requires 'Types::Standard';
+test_requires 'Test::Exception';
 
 WriteAll;
