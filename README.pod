@@ -39,6 +39,16 @@ Test::Mountebank - Perl client library for mountebank
         body => '{ "error": "No such qux: 999" }',
     );
 
+    # Add a stub to return HTML content read from a file
+    $imposter->stub->predicate(
+        path   => "/foobar.html",
+        method => "GET",
+    )->response(
+        statusCode     => 200,
+        headers        => { Content_Type => "text/html" },
+        body_from_file => './foobar.html',
+    );
+
     # Clear existing imposter on port 4546
     $mb->delete_imposters(4546); # Takes more than one port number, if desired
 
@@ -97,12 +107,33 @@ the following, which can be sent to the running mountebank instance in a POST re
                         }
                     }
                 ]
+            },
+            {
+                "predicates": [
+                    {
+                        "equals": {
+                            "method": "GET",
+                            "path": "/foobar.html"
+                        }
+                    }
+                ],
+                "responses": [
+                    {
+                        "is": {
+                            "body": "<html>\n  <head>\n    <title>foobar</title>\n  </head>\n  <body>\n    foobar\n  </body>\n</html>\n\n",
+                            "headers": {
+                                "Content-Type": "text/html"
+                            },
+                            "statusCode": 200
+                        }
+                    }
+                ]
             }
         ]
     }
 
 Compare the mountebank documentation at L<http://www.mbtest.org/docs/api/stubs>
-and L<http://www.mbtest.org/docs/api/predicates>.  Currently as least,
+and L<http://www.mbtest.org/docs/api/predicates>.  Currently at least,
 Test::Mountebank implements only the features of mountebank stubs that are most
 useful for simulating a REST API. There is only one type of predicate (C<equals>)
 and only one type of response (C<is>).
