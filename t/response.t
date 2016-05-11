@@ -4,7 +4,7 @@ use strict;
 use Test::More;
 use Test::Deep;
 use Test::Mountebank::Response::Is;
-use Mojo::JSON qw(decode_json);
+use JSON::Tiny qw(decode_json);
 use HTTP::Headers;
 use File::Temp;
 use Test::Exception;

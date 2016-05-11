@@ -4,7 +4,7 @@ use strict;
 use Test::More;
 use Test::Deep;
 use Test::Mountebank::Imposter;
-use Mojo::JSON qw(decode_json);
+use JSON::Tiny qw(decode_json);
 
 my $imposter = Test::Mountebank::Imposter->new( port => 4546 );
 

@@ -3,7 +3,7 @@ package Test::Mountebank::Stub;
 use Moose;
 use Test::Mountebank::Predicate::Equals;
 use Test::Mountebank::Response::Is;
-use Mojo::JSON qw(encode_json);
+use JSON::Tiny qw(encode_json);
 use Carp;
 
 has predicates => (

@@ -2,7 +2,7 @@ package Test::Mountebank::Imposter;
 
 use Moose;
 use Test::Mountebank::Stub;
-use Mojo::JSON qw(encode_json);
+use JSON::Tiny qw(encode_json);
 use Carp;
 
 has protocol => ( is => 'rw', isa => 'Str', default => 'http' );

@@ -4,7 +4,7 @@ use Moose;
 
 use Test::Mountebank::Types qw( HTTPHeaders );
 use MooseX::Types::HTTPMethod qw(HTTPMethod11);
-use Mojo::JSON qw(encode_json);
+use JSON::Tiny qw(encode_json);
 
 has method      => ( is => 'ro', isa => HTTPMethod11 );
 has path        => ( is => 'ro', isa => 'Str' );

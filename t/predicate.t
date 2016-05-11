@@ -4,7 +4,7 @@ use strict;
 use Test::More;
 use Test::Deep;
 use Test::Mountebank::Predicate::Equals;
-use Mojo::JSON qw(decode_json);
+use JSON::Tiny qw(decode_json);
 
 subtest 'full equals' => sub  {
     my $eq = Test::Mountebank::Predicate::Equals->new(

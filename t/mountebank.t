@@ -5,7 +5,7 @@ use Test::More;
 use Test::Mocha;
 use Test::Deep;
 use Test::Mountebank::Client;
-use Mojo::JSON qw(decode_json encode_json);
+use JSON::Tiny qw(decode_json encode_json);
 use Types::Standard qw(Any StrMatch);
 
 my $mock_ua = mock();

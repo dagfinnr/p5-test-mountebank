@@ -2,7 +2,7 @@ package Test::Mountebank::Response::Is;
 
 use Moose;
 use Test::Mountebank::Types qw( HTTPHeaders );
-use Mojo::JSON qw(encode_json);
+use JSON::Tiny qw(encode_json);
 use File::Slurper qw/read_text/;
 use Carp;
 

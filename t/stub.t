@@ -4,7 +4,7 @@ use strict;
 use Test::More;
 use Test::Deep;
 use Test::Mountebank::Stub;
-use Mojo::JSON qw(decode_json);
+use JSON::Tiny qw(decode_json);
 
 my $stub = Test::Mountebank::Stub->new();
 

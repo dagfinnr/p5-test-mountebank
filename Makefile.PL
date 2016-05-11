@@ -8,7 +8,7 @@ all_from 'lib/Test/Mountebank.pm';
 requires 'File::Slurper';
 requires 'HTTP::Message' => '6.11';
 requires 'Method::Signatures';
-requires 'Mojo::JSON';
+requires 'JSON::Tiny';
 requires 'Mojo::UserAgent';
 requires 'Moose';
 requires 'MooseX::Types';
