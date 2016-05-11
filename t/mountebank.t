@@ -20,12 +20,10 @@ subtest 'can construct URL' => sub  {
 };
 
 subtest 'can check Mountebank available' => sub  {
-    my $mock_tx = mock();
-    stub { $mock_tx->error() } returns 0;
-    stub { $mock_ua->head('http://example.com:2525') } returns $mock_tx;
-    ok( $client->is_available() );
-    stub { $mock_tx->error() } returns 1;
+    stub { $mock_ua->head('http://example.com:2525') } returns {success => '' };
     ok( !$client->is_available() );
+    stub { $mock_ua->head('http://example.com:2525') } returns { success => 1 };
+    ok( $client->is_available() );
 };
 
 subtest 'can delete imposters' => sub  {
@@ -85,8 +83,8 @@ subtest 'can create imposter' => sub  {
         ]
     };
 
-    my ($call) = inspect { $mock_ua->post(Any, Any, Any ) };
-    cmp_deeply([$call->args()]->[2], $expect_json);
+    my ($call) = inspect { $mock_ua->post(Any, Any) };
+    cmp_deeply(decode_json([$call->args()]->[1]->{content}), $expect_json);
 };
 
 done_testing();

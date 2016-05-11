@@ -1,12 +1,13 @@
 package Test::Mountebank::Client;
 use Moose;
 use Method::Signatures;
-use Mojo::UserAgent;
+use HTTP::Tiny;
+use JSON::Tiny qw(encode_json);
 use Test::Mountebank::Imposter;
 
 has ua => (
     is      => 'ro',
-    default => sub { Mojo::UserAgent->new() },
+    default => sub { HTTP::Tiny->new() },
 );
 has base_url => ( is => 'ro', isa => 'Str', required => 1 );
 has port => ( is => 'rw', isa => 'Int', default => 2525 );
@@ -20,7 +21,7 @@ method mb_url() {
 }
 
 method is_available() {
-    return ! $self->ua->head($self->mb_url)->error;
+    return $self->ua->head($self->mb_url)->{success};
 }
 
 method delete_imposters(@on_ports) {
@@ -28,7 +29,13 @@ method delete_imposters(@on_ports) {
 }
 
 method save_imposter(Test::Mountebank::Imposter $imp) {
-    $self->ua->post($self->mb_url . "/imposters" => json => $imp->as_hashref);
+    $self->ua->post(
+        $self->mb_url . "/imposters",
+        {
+            headers => { "Content-Type" => "application/json" },
+            content => $imp->as_json,
+        },
+    );
 }
 
 1;

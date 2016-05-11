@@ -9,7 +9,7 @@ requires 'File::Slurper';
 requires 'HTTP::Message' => '6.11';
 requires 'Method::Signatures';
 requires 'JSON::Tiny';
-requires 'Mojo::UserAgent';
+requires 'HTTP::Tiny';
 requires 'Moose';
 requires 'MooseX::Types';
 requires 'MooseX::Types::HTTPMethod';
