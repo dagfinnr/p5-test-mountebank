@@ -2,6 +2,8 @@ package Test::Mountebank;
 
 use Test::Mountebank::Client;
 
+our $VERSION = '0.001';
+
 =encoding utf8
 
 =head1 NAME
