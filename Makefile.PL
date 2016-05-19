@@ -1,7 +1,9 @@
 use inc::Module::Install;
 
+name 'Test-Mountebank';
+
 perl_version '5.010001';
-license 'proprietary'; # the license type ('all_from' needs this)
+license 'perl';
 
 all_from 'lib/Test/Mountebank.pm';
 
