@@ -26,8 +26,4 @@ sub as_hashref {
     return { equals => $hashref };
 }
 
-sub as_json {
-    return encode_json( $_[0]->as_hashref() );
-}
-
 1;

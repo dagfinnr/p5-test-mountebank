@@ -35,8 +35,4 @@ method as_hashref() {
     return { is => $hashref };
 }
 
-method as_json() {
-    return encode_json( $self->as_hashref() );
-}
-
 1;

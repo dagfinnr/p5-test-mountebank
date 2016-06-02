@@ -34,7 +34,7 @@ subtest 'full equals' => sub  {
         }
     };
 
-    cmp_deeply( decode_json($eq->as_json), $expect_json );
+    cmp_deeply( $eq->as_hashref(), $expect_json );
 };
 
 subtest 'simple equals' => sub  {
@@ -48,7 +48,7 @@ subtest 'simple equals' => sub  {
         }
     };
 
-    cmp_deeply( decode_json($eq->as_json), $expect_json );
+    cmp_deeply( $eq->as_hashref(), $expect_json );
 };
 
 done_testing();

@@ -29,7 +29,7 @@ subtest 'string body' => sub  {
             body => '<customer><email>customer@test.com</email></customer>'
         }
     };
-    cmp_deeply( decode_json($is->as_json), $expect_json );
+    cmp_deeply( $is->as_hashref(), $expect_json );
 };
 
 subtest 'hashref/json body' => sub  {
@@ -52,7 +52,7 @@ subtest 'hashref/json body' => sub  {
             body => { foo => 'bar' },
         }
     };
-    cmp_deeply( decode_json($is->as_json), $expect_json );
+    cmp_deeply( $is->as_hashref(), $expect_json );
 };
 
 subtest 'can get body from file' => sub  {
@@ -69,7 +69,7 @@ subtest 'can get body from file' => sub  {
             body => $html,
         },
     };
-    cmp_deeply( decode_json($is->as_json), $expect_json);
+    cmp_deeply( $is->as_hashref(), $expect_json );
 };
 
 subtest 'croaks on empty body' => sub  {
