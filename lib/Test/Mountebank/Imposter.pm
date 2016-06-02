@@ -1,6 +1,7 @@
 package Test::Mountebank::Imposter;
 
 use Moose;
+use Method::Signatures;
 use Test::Mountebank::Stub;
 use JSON::Tiny qw(encode_json);
 use Carp;
@@ -23,15 +24,13 @@ has stubs   => (
     },
 );
 
-sub stub {
-    my $self = shift;
+method stub() {
     my $stub = Test::Mountebank::Stub->new(@_);
     $self->add_stub($stub);
     return $stub;
 }
 
-sub as_hashref {
-    my $self = shift;
+method as_hashref() {
     croak "An imposter must have at least one stub" if $self->has_no_stubs;
     return {
         stubs    => [ $self->map_stubs( sub { $_->as_hashref } ) ],
@@ -40,8 +39,8 @@ sub as_hashref {
     };
 }
 
-sub as_json {
-    return encode_json( $_[0]->as_hashref() );
+method as_json() {
+    return encode_json( $self->as_hashref() );
 }
 
 1;

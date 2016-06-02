@@ -1,6 +1,7 @@
 package Test::Mountebank::Stub;
 
 use Moose;
+use Method::Signatures;
 use Test::Mountebank::Predicate::Equals;
 use Test::Mountebank::Response::Is;
 use JSON::Tiny qw(encode_json);
@@ -34,20 +35,17 @@ has responses => (
     },
 );
 
-sub predicate {
-    my $self = shift;
-    $self->add_predicate(Test::Mountebank::Predicate::Equals->new(@_));
+method predicate(@args) {
+    $self->add_predicate(Test::Mountebank::Predicate::Equals->new(@args));
     return $self;
 }
 
-sub response {
-    my $self = shift;
-    $self->add_response(Test::Mountebank::Response::Is->new(@_));
+method response(@args) {
+    $self->add_response(Test::Mountebank::Response::Is->new(@args));
     return $self;
 }
 
-sub as_hashref {
-    my $self = shift;
+method as_hashref() {
     croak "A stub must have at least one predicate" if $self->has_no_predicates;
     croak "A stub must have at least one response"  if $self->has_no_responses;
     return {
@@ -56,7 +54,8 @@ sub as_hashref {
     };
 }
 
-sub as_json {
-    return encode_json( $_[0]->as_hashref() );
+method as_json() {
+    return encode_json( $self->as_hashref() );
 }
+
 1;
