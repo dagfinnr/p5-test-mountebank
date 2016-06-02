@@ -17,9 +17,9 @@ has body_from_file => (
     trigger    => \&_read_body_from_file,
 );
 
-method _read_body_from_file(@args) {
-    my $body = read_text($self->body_from_file);
-    croak ("Empty response body read from file: " . $self->body_from_file) if length($body) < 1;
+method _read_body_from_file($file, ...) {
+    my $body = read_text($file);
+    croak ("Empty response body read from file: " . $file) if length($body) < 1;
     $self->body($body);
 }
 
