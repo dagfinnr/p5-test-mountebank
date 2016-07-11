@@ -7,7 +7,7 @@ use JSON::Tiny qw(encode_json);
 use File::Slurper qw/read_text/;
 use Carp;
 
-has statusCode     => ( is => 'ro', isa => 'Int' );
+has status_code    => ( is => 'ro', isa => 'Int' );
 has body           => ( is => 'rw', isa => 'Str | HashRef' );
 
 has headers        => (
@@ -32,7 +32,8 @@ method _read_body_from_file($file, ...) {
 # The trigger is used only to set the content type header in the HTTP::Headers
 # object right after the object has been created. This is the only reason why
 # the attribute exists in the first place. It supports the ability to specify
-# it in a Moose-normal way when creating the object.
+# it in a Moose-normal way when creating the object. After creation, the value
+# is fetched from the HTTP::Headers object.
 
 has content_type => (
     is         => 'ro',
@@ -42,7 +43,7 @@ has content_type => (
     }
 );
 
-# The content_type attribute is ignored when getting the content_type value.
+# The content_type attribute itself is ignored when getting the content_type value.
 # Instead, it is fetched from the HTTP::Headers object.
 
 around 'content_type' => func($orig, $self) {
@@ -51,9 +52,8 @@ around 'content_type' => func($orig, $self) {
 
 method as_hashref() {
     my $hashref = ();
-    for (qw/ body statusCode /) {
-        $hashref->{$_} = $self->$_, if $self->$_;
-    }
+    $hashref->{body} = $self->body if $self->body;
+    $hashref->{statusCode} = $self->status_code if $self->status_code;
     if ($self->headers) {
         my %headers = $self->headers->flatten;
         $hashref->{headers} = \%headers if %headers;

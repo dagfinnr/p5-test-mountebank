@@ -28,7 +28,7 @@ Test::Mountebank - Perl client library for mountebank
         path => "/foobar.json",
         method => "GET",
     )->response(
-        statusCode => 200,
+        status_code => 200,
         content_type => "application/json",
         # Equivalent:
         # headers => { Content_Type => "application/json" },
@@ -42,7 +42,7 @@ Test::Mountebank - Perl client library for mountebank
         path => "/qux/999/json",
         method => "GET",
     )->response(
-        statusCode => 404,
+        status_code => 404,
         content_type => "application/json",
         body => '{ "error": "No such qux: 999" }',
     );
@@ -52,7 +52,7 @@ Test::Mountebank - Perl client library for mountebank
         path   => "/foobar.html",
         method => "GET",
     )->response(
-        statusCode     => 200,
+        status_code     => 200,
         content_type => "text/html",
         body_from_file => './foobar.html',
     );

@@ -11,7 +11,7 @@ use Test::Exception;
 
 subtest 'string body' => sub  {
     my $is = Test::Mountebank::Response::Is->new(
-        statusCode => 201,
+        status_code => 201,
         headers => {
             Location => "http://localhost:4545/customers/123",
             Content_Type => "application/xml"
@@ -34,7 +34,7 @@ subtest 'string body' => sub  {
 
 subtest 'hashref/json body' => sub  {
     my $is = Test::Mountebank::Response::Is->new(
-        statusCode => 201,
+        status_code => 201,
         headers => {
             Location => "http://localhost:4545/customers/123",
             Content_Type => "application/xml"
@@ -79,7 +79,7 @@ subtest 'croaks on empty body' => sub  {
 
 subtest 'content type shortcut' => sub  {
     my $is = Test::Mountebank::Response::Is->new(
-        statusCode => 200,
+        status_code => 200,
         content_type => 'text/css',
     );
 

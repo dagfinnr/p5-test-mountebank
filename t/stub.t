@@ -11,7 +11,7 @@ my $stub = Test::Mountebank::Stub->new();
 $stub->predicate(
     path => "/test",
 )->response(
-    statusCode => 404,
+    status_code => 404,
     headers => {
         Content_Type => "text/html"
     },

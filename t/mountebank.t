@@ -46,7 +46,7 @@ subtest 'can create imposter' => sub  {
 
     $stub->add_response(
         Test::Mountebank::Response::Is->new(
-            statusCode => 404,
+            status_code => 404,
             headers => HTTP::Headers->new(
                 Content_Type => "text/html"
             ),

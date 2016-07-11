@@ -11,7 +11,7 @@ my $imposter = Test::Mountebank::Imposter->new( port => 4546 );
 $imposter->stub->predicate(
     path => "/test",
 )->response(
-    statusCode => 404,
+    status_code => 404,
     headers => {
         Content_Type => "text/html"
     },
