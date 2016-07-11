@@ -76,4 +76,15 @@ subtest 'croaks on empty body' => sub  {
     my $tmp = File::Temp->new(SUFFIX => '.html');
     dies_ok { Test::Mountebank::Response::Is->new( body_from_file => "$tmp") };
 };
+
+subtest 'content type shortcut' => sub  {
+    my $is = Test::Mountebank::Response::Is->new(
+        statusCode => 200,
+        content_type => 'text/css',
+    );
+
+    is($is->headers->header('Content_Type'), 'text/css');
+    is($is->content_type, 'text/css');
+};
+
 done_testing();
