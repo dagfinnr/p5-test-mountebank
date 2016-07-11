@@ -61,12 +61,14 @@ subtest 'can get body from file' => sub  {
     print $tmp $html;
     $tmp->close();
     my $is = Test::Mountebank::Response::Is->new(
+        status_code    => 200,
         body_from_file => "$tmp",
     );
 
     my $expect_json = {
         is => {
-            body => $html,
+            body       => $html,
+            statusCode => 200,
         },
     };
     cmp_deeply( $is->as_hashref(), $expect_json );
@@ -74,7 +76,9 @@ subtest 'can get body from file' => sub  {
 
 subtest 'croaks on empty body' => sub  {
     my $tmp = File::Temp->new(SUFFIX => '.html');
-    dies_ok { Test::Mountebank::Response::Is->new( body_from_file => "$tmp") };
+    dies_ok { Test::Mountebank::Response::Is->new(
+            status_code    => 200,
+            body_from_file => "$tmp") };
 };
 
 subtest 'content type shortcut' => sub  {

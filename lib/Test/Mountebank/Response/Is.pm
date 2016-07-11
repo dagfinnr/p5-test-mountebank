@@ -7,7 +7,7 @@ use JSON::Tiny qw(encode_json);
 use File::Slurper qw/read_text/;
 use Carp;
 
-has status_code    => ( is => 'ro', isa => 'Int' );
+has status_code    => ( is => 'ro', isa => 'Int', required => 1 );
 has body           => ( is => 'rw', isa => 'Str | HashRef' );
 
 has headers        => (
