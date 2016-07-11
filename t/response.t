@@ -91,4 +91,11 @@ subtest 'content type shortcut' => sub  {
     is($is->content_type, 'text/css');
 };
 
+subtest 'croaks on invalid content type' => sub  {
+    dies_ok { Test::Mountebank::Response::Is->new(
+            status_code    => 200,
+            content_type => 'text/bazqux',
+        )};
+};
+
 done_testing();

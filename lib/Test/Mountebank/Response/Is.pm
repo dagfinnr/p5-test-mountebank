@@ -6,6 +6,7 @@ use Test::Mountebank::Types qw( HTTPHeaders );
 use JSON::Tiny qw(encode_json);
 use File::Slurper qw/read_text/;
 use Carp;
+use MIME::Types;
 
 has status_code    => ( is => 'ro', isa => 'Int', required => 1 );
 has body           => ( is => 'rw', isa => 'Str | HashRef' );
@@ -39,6 +40,8 @@ has content_type => (
     is         => 'ro',
     isa        => 'Str',
     trigger    => method($content_type) {
+        my $mt = MIME::Types->new;
+        croak ("Invalid content type: " . $content_type) if !$mt->type($content_type);
         $self->headers->content_type($content_type);
     }
 );
