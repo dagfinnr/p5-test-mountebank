@@ -25,26 +25,26 @@ Test::Mountebank - Perl client library for mountebank
     # Adds a stub to the imposter with a predicate and a response
     # (Responds to URL /foobar.json, returns JSON content '{"foo":"bar"}')
     $imposter->stub->predicate(
-        path => "/foobar.json",
+        path   => "/foobar.json",
         method => "GET",
     )->response(
-        status_code => 200,
+        status_code  => 200,
         content_type => "application/json",
         # Equivalent:
-        # headers => { Content_Type => "application/json" },
-        body => { foo => "bar" },
+        # headers    => { Content_Type => "application/json" },
+        body         => { foo => "bar" },
         # Equivalent:
-        # body => '{ "foo":"bar" }',
+        # body       => '{ "foo":"bar" }',
     );
 
     # Adds a stub for a non-existent resource
     $imposter->stub->predicate(
-        path => "/qux/999/json",
+        path   => "/qux/999/json",
         method => "GET",
     )->response(
-        status_code => 404,
+        status_code  => 404,
         content_type => "application/json",
-        body => '{ "error": "No such qux: 999" }',
+        body         => '{ "error": "No such qux: 999" }',
     );
 
     # Add a stub to return HTML content read from a file
@@ -52,8 +52,8 @@ Test::Mountebank - Perl client library for mountebank
         path   => "/foobar.html",
         method => "GET",
     )->response(
-        status_code     => 200,
-        content_type => "text/html",
+        status_code    => 200,
+        content_type   => "text/html",
         body_from_file => './foobar.html',
     );
 
