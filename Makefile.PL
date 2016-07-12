@@ -12,6 +12,7 @@ requires 'HTTP::Message' => '6.11';
 requires 'Method::Signatures';
 requires 'JSON::Tiny';
 requires 'HTTP::Tiny';
+requires 'MIME::Types';
 requires 'Moose';
 requires 'MooseX::Types';
 requires 'MooseX::Types::HTTPMethod';
@@ -22,5 +23,6 @@ test_requires 'Test::Mocha';
 test_requires 'Test::More';
 test_requires 'Types::Standard';
 test_requires 'Test::Exception';
+test_requires 'File::Temp';
 
 WriteAll;
