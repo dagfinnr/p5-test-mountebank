@@ -1,4 +1,5 @@
 package Test::Mountebank::Imposter;
+our $VERSION = '0.001';
 
 use Moose;
 use Method::Signatures;

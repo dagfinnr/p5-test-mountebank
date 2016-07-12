@@ -1,4 +1,5 @@
 package Test::Mountebank::Response::Is;
+our $VERSION = '0.001';
 
 use Moose;
 use Method::Signatures;

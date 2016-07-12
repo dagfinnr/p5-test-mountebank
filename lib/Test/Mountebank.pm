@@ -1,8 +1,7 @@
 package Test::Mountebank;
+our $VERSION = '0.001';
 
 use Test::Mountebank::Client;
-
-our $VERSION = '0.001';
 
 =encoding utf8
 

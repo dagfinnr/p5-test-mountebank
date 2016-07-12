@@ -1,4 +1,6 @@
 package Test::Mountebank::Types;
+our $VERSION = '0.001';
+
 use HTTP::Headers;
 
 use MooseX::Types -declare => [

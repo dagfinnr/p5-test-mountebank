@@ -1,4 +1,6 @@
 package Test::Mountebank::Client;
+our $VERSION = '0.001';
+
 use Moose;
 use Method::Signatures;
 use HTTP::Tiny;

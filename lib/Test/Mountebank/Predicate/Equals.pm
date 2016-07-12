@@ -1,4 +1,5 @@
 package Test::Mountebank::Predicate::Equals;
+our $VERSION = '0.001';
 
 use Moose;
 
