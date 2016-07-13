@@ -1,7 +1,7 @@
 package Test::Mountebank::Predicate::Equals;
-our $VERSION = '0.001';
 
 use Moose;
+our $VERSION = '0.001';
 
 use Test::Mountebank::Types qw( HTTPHeaders );
 use MooseX::Types::HTTPMethod qw(HTTPMethod11);

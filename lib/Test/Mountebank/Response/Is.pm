@@ -1,7 +1,7 @@
 package Test::Mountebank::Response::Is;
-our $VERSION = '0.001';
 
 use Moose;
+our $VERSION = '0.001';
 use Method::Signatures;
 use Test::Mountebank::Types qw( HTTPHeaders );
 use JSON::Tiny qw(encode_json);

@@ -1,3 +1,4 @@
+use 5.014;
 package Test::Mountebank::Types;
 our $VERSION = '0.001';
 

@@ -1,7 +1,7 @@
 package Test::Mountebank::Client;
-our $VERSION = '0.001';
 
 use Moose;
+our $VERSION = '0.001';
 use Method::Signatures;
 use HTTP::Tiny;
 use JSON::Tiny qw(encode_json);

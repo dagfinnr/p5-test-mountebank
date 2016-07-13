@@ -1,7 +1,7 @@
 package Test::Mountebank::Stub;
-our $VERSION = '0.001';
 
 use Moose;
+our $VERSION = '0.001';
 use Method::Signatures;
 use Test::Mountebank::Predicate::Equals;
 use Test::Mountebank::Response::Is;

@@ -1,7 +1,7 @@
 package Test::Mountebank::Imposter;
-our $VERSION = '0.001';
 
 use Moose;
+our $VERSION = '0.001';
 use Method::Signatures;
 use Test::Mountebank::Stub;
 use JSON::Tiny qw(encode_json);
