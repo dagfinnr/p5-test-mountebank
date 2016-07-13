@@ -5,7 +5,6 @@ use Test::More;
 use Test::Deep;
 use Test::Mountebank::Response::Is;
 use JSON::Tiny qw(decode_json);
-use HTTP::Headers;
 use File::Temp;
 use Test::Exception;
 

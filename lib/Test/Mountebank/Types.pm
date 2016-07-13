@@ -2,7 +2,7 @@ use 5.014;
 package Test::Mountebank::Types;
 our $VERSION = '0.001';
 
-use HTTP::Headers;
+use HTTP::Message 6.11;
 
 use MooseX::Types -declare => [
     qw( HTTPHeaders )
